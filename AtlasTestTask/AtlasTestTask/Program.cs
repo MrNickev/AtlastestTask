@@ -2,7 +2,7 @@ using AtlasTestTask.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSingleton<IPaymentScheduleService, PaymentScheduleService>();
+builder.Services.AddScoped<IPaymentScheduleService, PaymentScheduleService>();
 builder.Services.AddControllersWithViews();
 
 
