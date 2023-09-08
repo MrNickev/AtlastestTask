@@ -22,7 +22,6 @@ public class CalculateDailyController : Controller
     
     public IActionResult Result(CreditDailyModel creditDaily)
     {
-        Console.WriteLine($"{creditDaily.Value} {creditDaily.Term} {creditDaily.Rate}");
         var context = new ValidationContext(creditDaily, serviceProvider: null, items: null);
         var validationResults = new List<ValidationResult>();
         var isValid = Validator.TryValidateObject(creditDaily, context, validationResults, true);

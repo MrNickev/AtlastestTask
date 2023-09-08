@@ -22,7 +22,6 @@ public class CalculateController : Controller
     [HttpPost]
     public IActionResult Result(CreditModel credit)
     {
-        Console.WriteLine($"{credit.Value} {credit.Term} {credit.Rate}");
         var context = new ValidationContext(credit, serviceProvider: null, items: null);
         var validationResults = new List<ValidationResult>();
         var isValid = Validator.TryValidateObject(credit, context, validationResults, true);
