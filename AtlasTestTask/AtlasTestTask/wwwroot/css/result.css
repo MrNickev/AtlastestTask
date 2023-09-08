@@ -1,0 +1,24 @@
+.main {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height: 100%;
+}
+
+.table {
+    border-collapse: collapse;
+    margin-top: 200px;
+}
+
+.table tr td {
+    padding: 10px;
+    text-align: center;
+}
+
+.table thead tr {
+    background-color: #c0c0c0;
+}
+
+.table tbody tr:nth-child(2n) {
+    background-color: #c0c0c0;
+}

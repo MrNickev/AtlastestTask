@@ -1,0 +1,36 @@
+@model CreditModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <title>Рассчитать</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="~/css/credit-from.css" type="text/css">
+    <link rel="stylesheet" href="~/css/site.css" type="text/css">
+</head>
+<body>
+<header>
+  <nav>
+    <ul>
+      <li><a class="nav-link text-dark" asp-area="" asp-controller="Calculate" asp-action="Index">Рассчитать займ</a></li>
+      <li><a class="nav-link text-dark" asp-area="" asp-controller="CalculateDaily" asp-action="Index">Рассчитать подневный займ</a></li>
+    </ul>
+  </nav>
+</header>
+<form asp-controller="Calculate" asp-action="Result" id="creditForm" method="post" class="mx-auto">
+    <input type="number" name="Value" step="0.01" asp-for="Value" placeholder="Сумма кредита" class="form-control">
+    <input type="number" name="Term" asp-for="Term" placeholder="Срок займа (мес.)" class="form-control">
+    <input type="number" name="Rate" step="0.01" asp-for="Rate" min="1" max="100" placeholder="Ставка (в год)" class="form-control">
+    <input type="submit" value="Рассчитать" class="submit-button">
+    @ViewBag.ErrorMessage
+</form>
+</body>
+<script src="js/validate-form-data.js"></script>
+</html>

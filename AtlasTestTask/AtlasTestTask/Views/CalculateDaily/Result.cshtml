@@ -1,0 +1,88 @@
+@using System.Globalization
+@model PaymentScheduleModel
+
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <title>Результат</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="~/css/result.css" type="text/css">
+    <link rel="stylesheet" href="~/css/site.css" type="text/css">
+</head>
+<body>
+<header>
+  <nav>
+    <ul>
+      <li><a class="nav-link text-dark" asp-area="" asp-controller="Calculate" asp-action="Index">Рассчитать займ</a></li>
+      <li><a class="nav-link text-dark" asp-area="" asp-controller="CalculateDaily" asp-action="Index">Рассчитать подневный займ</a></li>
+    </ul>
+  </nav>
+</header>
+<div class="main">
+    <table class="table">
+        <thead>
+        <tr>
+            <td>
+                №
+            </td>
+            <td>
+                Сумма платежа
+            </td>
+            <td>
+                Дата
+            </td>
+            <td>
+                Размер платежа по телу
+            </td>
+            <td>
+                Размер платежа по %
+            </td>
+            <td>
+                Остаток основного долга
+            </td>
+        </tr>
+        </thead>
+        <tbody>
+        @for (var i = 0; i < Model.Payments.Count; i++)
+        {
+            @:<tr>
+            <td>@(i + 1)</td>
+            <td>@Model.Payments[i].Value</td>
+            <td>@Model.Payments[i].Date.ToString("dd MMMM yyyy", CultureInfo.CurrentCulture)</td>
+            <td>@Model.Payments[i].BasePayment</td>
+            <td>@Model.Payments[i].RatePayment</td>
+            <td>@Model.Payments[i].ReaminingDebt</td>
+            @:</tr> 
+        }
+        <tr>
+            <td>Итого</td>
+            <td>@Model.OverrideAmount</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Переплата</td>
+            <td>@(Math.Round(Model.OverrideAmount - Model.Payments[0].ReaminingDebt - Model.Payments[0].BasePayment, 2))</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        </tbody>
+    </table>
+    @if (Model.Payments.Count == 0)
+    {
+        @:<div>Ошибка рассчета</div>
+    }
+</div>
+</body>
+</html>
